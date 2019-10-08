@@ -6,7 +6,7 @@ To run DPU on PYNQ-Z2, except for instantiating DPU IP to FPGA bitstream, the co
 
 ![](images/PYNQ_DPU_YOLO.PNG)
 
-Please follow the below steps to rebuild the PYNQ-Z2 V2.4 image for DPU.
+To rebuild the PYNQ-Z2 V2.4 image for DPU, please follow the below steps.
 
 * Step 1. Prepare the Vivado project, bootloader, Linux kernel and DPU driver. The BOOT.BIN, image.ub and dpu.ko will be used by the follow-up step. Please refer to [build-pynqz2-system](https://github.com/xupsh/dnndk3.0-pynqz2/blob/master/build-pynqz2-system.md)
 * Step 2. Download the official [PYNQ-Z2 image V2.4](http://www.pynq.io/board.html) or follow the [PYNQ Image Build Flow](https://github.com/Xilinx/PYNQ/tree/master/sdbuild) to build a new image.
