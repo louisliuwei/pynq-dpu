@@ -35,7 +35,7 @@ To rebuild the PYNQ-Z2 V2.4 image for DPU, please follow the below steps.
 * **Step 8**. Install DPU module  
   *sudo insmod dpu.ko*  
 
-* **Step 9**. X11 preparation  
+* **Step 9**. Configure X window client  
 
   *su*  
   *xauth merge /home/xilinx/.Xauthority*  
