@@ -1,6 +1,6 @@
 ## PYNQ-DPU-Flow
 
-This repository is a guidance to create a PYNQ DPU Overlay and build a PYNQ-Z2 V2.4 image for DPU that compatible with the DPU Overlay, that can be used to accelerate your AI apps based on Xilinx Edge AI solution on PYNQ-Z2.
+This guidance is assumed to show you how to create a PYNQ DPU Overlay and build a PYNQ-Z2 V2.4 image that compatible with the DPU Overlay.  
 
 ![](images/PYNQ_DPU_YOLO.PNG)   
 
