@@ -18,7 +18,7 @@ To rebuild the PYNQ-Z2 V2.4 image for DPU, please follow the below steps.
 
 * **Step 5**. Boot up the PYNQ-Z2 using the new Image. and follow the following steps to prepare the DPU environments. 
 
-* **Step 6**. Download the source files form https://opencv.org/opencv-3-3.html and then install OpenCV3.3 to board.  
+* **Step 6**. Download the source files from https://opencv.org/opencv-3-3.html and then install OpenCV3.3 to board.  
 
   *sudo apt-get update*  
   *sudo apt-get upgrade*  
