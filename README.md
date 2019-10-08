@@ -2,9 +2,10 @@
 
 This repository is a guidance to create a PYNQ DPU Overlay and build a PYNQ-Z2 V2.4 image for DPU that compatible with the DPU Overlay, that can be used to accelerate your AI apps based on Xilinx Edge AI solution on PYNQ-Z2.
 
-To run DPU on PYNQ-Z2, except for instantiating DPU IP to FPGA bitstream, the corresponding linux driver and OpenCV 3.3 library should also be prepared. You can download the pre-built image contains prepared demos from [PYNQ-Z2 V2.4 image for DPU](https://pan.baidu.com/s/1gOJaoJJ8z2jf-BaLklID3Q), or rebuild the PYNQ-Z2 V2.4 image for DPU following the below steps.  
+![](images/PYNQ_DPU_YOLO.PNG)   
 
-![](images/PYNQ_DPU_YOLO.PNG) 
+![](images/PYNQ_DPU_YOLO_X_Window.PNG)  
+To run DPU on PYNQ-Z2, except for instantiating DPU IP to FPGA fabric, the corresponding Linux driver and OpenCV 3.3 library should also be prepared. You can download the pre-built image contains prepared demos from [PYNQ-Z2 V2.4 image for DPU](https://pan.baidu.com/s/1gOJaoJJ8z2jf-BaLklID3Q), or rebuild the PYNQ-Z2 V2.4 image for DPU following the below steps.  
 
 * **Step 1**. Prepare the Vivado project, bootloader, Linux kernel and DPU driver. Please refer to [build-pynqz2-system](https://github.com/xupsh/dnndk3.0-pynqz2/blob/master/build-pynqz2-system.md). The generated BOOT.BIN, image.ub and dpu.ko files will be used by the follow-up step.  
 
