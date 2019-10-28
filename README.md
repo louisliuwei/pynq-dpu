@@ -13,15 +13,20 @@ To run DPU on PYNQ-Z2, except for instantiating DPU IP to FPGA fabric, the corre
 
 * **Step 3**. Repalce the BOOT.BIN and image.ub of the PYNQ image V2.4 with the files generated in step1.  
 
-* **Step 4**. Copy the dpu.ko and the files in sdcard in step 1 to PYNQ image or download them to the board after booting up.  
-
+* **Step 4**. Copy the dpu.ko and the below files contained in rootfs.tar.gz generated in step 1 to PYNQ rootfs or download them to the board after booting up.  
+*/lib/modules/4.14.0+/extra/dpu.ko*  
+*/lib/modules/4.14.0+/kernel/drivers/media/usb/uvc/\**   
+*/lib/modules/4.14.0+/kernel/drivers/media/v4l2-core/\**   
+*/lib/modules/4.14.0+/kernel/drivers/usb/serial/\**   
+*/lib/modules/4.14.0+/kernel/drivers/net/\**   
 * **Step 5**. Boot up the PYNQ-Z2 using the new Image. and follow the following steps to prepare the DPU environments. 
 
 * **Step 6**. Download the source files from https://opencv.org/opencv-3-3.html and then install OpenCV3.3 to board.  
 
   *sudo apt-get update*  
   *sudo apt-get upgrade*  
-  *cd opencv-3.3.0mkdir build*  
+  *cd opencv-3.3.0*   
+  *mkdir build   
   *cd build*  
   *cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local*  
   *make*  
@@ -45,7 +50,7 @@ To run DPU on PYNQ-Z2, except for instantiating DPU IP to FPGA fabric, the corre
 
 * **Step 11**. Reboot and then configure wifi connection ( Optionnal)    
 
-  *nmtui*  
+  *sudo nmtui*  
 
 
 
