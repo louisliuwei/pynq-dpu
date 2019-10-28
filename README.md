@@ -40,7 +40,6 @@ To run DPU on PYNQ-Z2, except for instantiating DPU IP to FPGA fabric, the corre
   *sudo insmod dpu.ko*  
 
 * **Step 9**. Configure X window client  
-
   *su*  
   *xauth merge /home/xilinx/.Xauthority*  
 
