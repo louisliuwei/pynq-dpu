@@ -26,7 +26,7 @@ To run DPU on PYNQ-Z2, except for instantiating DPU IP to FPGA fabric, the corre
   *sudo apt-get update*  
   *sudo apt-get upgrade*  
   *cd opencv-3.3.0*   
-  *mkdir build   
+  *mkdir build*   
   *cd build*  
   *cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local*  
   *make*  
