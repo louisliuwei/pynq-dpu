@@ -1,61 +1,47 @@
-## PYNQ-DPU-Flow
+## Pre-requistes
+- PYNQv2.5 https://github.com/Xilinx/PYNQ/releases
+- DNNDK 3.1 https://www.xilinx.com/products/design-tools/ai-inference/ai-developer-hub.html#edge
+- rootfs.tar [rootfs.tar](https://pan.baidu.com/s/1hTtdL0vds3gAUVLqbQkGLA) (pass code: t8ep)
 
-This guidance is assumed to show you how to create a PYNQ DPU Overlay and build a PYNQ-Z2 V2.4 image that compatible with the DPU Overlay.  
+Before we get down to business, please reference [PYNQ Getting Started](https://pynq.readthedocs.io/en/v2.5.1/getting_started.html) to setup your board.
 
-![](images/PYNQ_DPU_YOLO.PNG)   
+## Install Dependencies
+```
+sudo apt update
+sudo apt upgrade -y
+sudo apt install libgoogle-glog-dev -y
+sudo apt remove libopencv-dev -y 
+# DNNDK C++ requires opencv 3.1, 3.3, 3.4, however the one provided by ubuntu18.04 is opencv 3.2
+sudo apt install python-pip -y
+# DNNDK3.1 provides Python2.7 based APIs, which is not compatible with jupyter notebook.
+# We have to install ipykernel manually to enable Python2.7 in jupyter notebook.
+sudo pip install ipykernel matplotlib==2.2.0 pillow
+```
 
-![](images/PYNQ_DPU_YOLO_X_Window.PNG)  
-To run DPU on PYNQ-Z2, except for instantiating DPU IP to FPGA fabric, the corresponding Linux driver and OpenCV 3.3 library should also be prepared. You can download the pre-built image contains prepared demos from [PYNQ-Z2 V2.4 image for DPU](https://pan.baidu.com/s/1gOJaoJJ8z2jf-BaLklID3Q), or rebuild the PYNQ-Z2 V2.4 image for DPU following the below steps.  
+## Install DNNDK
+- Unzip dnndk3.1
+- Copy xilinx_dnndk_3.1/ZedBoard to PYNQ-Z2
+- Copy xilinx_dnndk_3.1/common to PYNQ-Z2
+- Copy rootfs.tar to PYNQ-Z2, OpenCV3.3 libraries are included in it, which is compiled by Petalinux2018.3 with OpenCV enabled in rootfs.
+```
+mkdir rootfs
+tar -xvf rootfs.tar -C rootfs
+mkdir -p /usr/local/lib
+mkdir -p /usr/local/bin
 
-* **Step 1**. Prepare the Vivado project, bootloader, Linux kernel and DPU driver. Please refer to [build-pynqz2-system](https://github.com/xupsh/dnndk3.0-pynqz2/blob/master/build-pynqz2-system.md). The generated BOOT.BIN, image.ub and dpu.ko files will be used by the follow-up step.  
+# copy libopencv*.3.3 to /usr/lib
+sudo cp -r rootfs/usr/include/openc* /usr/include
+sudo cp -d rootfs/usr/lib/libopencv* /usr/lib
+sudo cp -d rootfs/usr/lib/libwebp* /usr/lib
+sudo cp rootfs/usr/lib/pkgconfig/opencv.pc /usr/lib/pkgconfig
 
-* **Step 2**. Follow the [PYNQ Image Build Flow](https://github.com/Xilinx/PYNQ/tree/master/sdbuild) to build a new image or download the official [PYNQ-Z2 image V2.4](http://www.pynq.io/board.html) (not been verified yet).  
-
-* **Step 3**. Repalce the BOOT.BIN and image.ub of the PYNQ image V2.4 with the files generated in step1.  
-
-* **Step 4**. Copy the dpu.ko and the below files contained in rootfs.tar.gz generated in step 1 to PYNQ rootfs or download them to the board after booting up.  
-*/lib/modules/4.14.0+/extra/dpu.ko*  
-*/lib/modules/4.14.0+/kernel/drivers/media/usb/uvc/\**   
-*/lib/modules/4.14.0+/kernel/drivers/media/v4l2-core/\**   
-*/lib/modules/4.14.0+/kernel/drivers/usb/serial/\**   
-*/lib/modules/4.14.0+/kernel/drivers/net/\**   
-* **Step 5**. Boot up the PYNQ-Z2 using the new Image. and follow the following steps to prepare the DPU environments. 
-
-* **Step 6**. Download the source files from https://opencv.org/opencv-3-3.html and then install OpenCV3.3 to board.  
-
-  *sudo apt-get update*  
-  *sudo apt-get upgrade*  
-  *cd opencv-3.3.0*   
-  *mkdir build*   
-  *cd build*  
-  *cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local*  
-  *make*  
-  *make install*  
-
-* **Step 7**. Install dnndk  
-  *cd zynq7020_dnndk_v3.0*  
-  *./install.sh*  
-
-* **Step 8**. Install DPU module  
-  *sudo insmod dpu.ko*  
-
-* **Step 9**. Configure X window client  
-  *su*  
-  *xauth merge /home/xilinx/.Xauthority*  
-
-* **Step 10**. Install network manager (Optional, if have one wifi dongle)  
-
-  *sudo apt-get install network-manager*  
-
-* **Step 11**. Reboot and then configure wifi connection ( Optionnal)    
-
-  *sudo nmtui*  
+cd Zedboard
+sudo chmod +x install.sh
+sudo ./install.sh
+sudo reboot
+```
 
 
+## Pre-built Image
+You can also directly download the [pre-built image](https://pan.baidu.com/s/1aqCYu1U0zqCZYBk6LjJuUA)  (passcode:9997) to try out the jupyter notebook with image.
 
-
-## Note
-
-PYNQ is an open-source software framework from Xilinx® that makes it easy to design embedded systems with Xilinx Zynq® Systems on Chips (SoCs).Using the Python language and libraries, designers can exploit the benefits of programmable logic in Zynq to build more capable and exciting embedded systems.
-
-The Xilinx® Deep Learning Processor Unit (DPU) is a programmable engine optimized for convolutional neural networks. The unit includes a high performance scheduler module, a hybrid computing array module, an instruction fetch unit module, and a global memory pool module. The DPU uses a specialized instruction set, which allows for the efficient implementation of many convolutional neural networks. Some examples of convolutional neural networks which have been deployed include VGG, ResNet, GoogLeNet, YOLO, SSD, MobileNet, FPN, and many others. The DPU IP can be implemented in the programmable logic (PL) of the selected Zynq®-7000 SoC or Zynq UltraScale+™ MPSoC devices with direct connections to the processing system (PS). The DPU requires instructions to implement a neural network and accessible memory locations for input images as well as temporary and output data. 
