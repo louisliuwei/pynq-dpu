@@ -45,3 +45,4 @@ sudo reboot
 ## Pre-built Image
 You can also directly download the [pre-built image](https://pan.baidu.com/s/1aqCYu1U0zqCZYBk6LjJuUA)  (passcode:9997) to try out the jupyter notebook with image.
 
+![](images/Jupyter_Notebook.JPG)
